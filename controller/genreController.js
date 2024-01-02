@@ -1,4 +1,6 @@
-const Genre = require('../model/genresModel')
+const {
+    Genre
+} = require('../model/genresModel')
 const {
     genreSchemaValidator
 } = require('../validators/validator')
@@ -42,6 +44,7 @@ async function getGenreById(req, res) {
 
 //***Create a new genre
 async function createGenre(req, res) {
+    
     try {
         //check if any errors are encountered 
         const {
@@ -91,8 +94,6 @@ async function updateGenre(req, res) {
             })
             return 0
         }
-
-
 
         //find the genre by id and update 
         const genre = await Genre.findByIdAndUpdate(req.params.id, req.body, {

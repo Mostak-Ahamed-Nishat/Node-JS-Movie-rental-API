@@ -3,7 +3,7 @@ require('dotenv').config()
 const dbConnection = require('./db')
 const app = express()
 const genre = require('./Routes/genresRoute')
-
+const movie = require('./Routes/moviesRoute')
 
 app.use(express.urlencoded({
     extended: true
@@ -16,6 +16,8 @@ app.use(express.json())
 
 //**Router for genres*/
 app.use('/api/genre', genre)
+
+app.use('/api/movie', movie)
 
 
 
