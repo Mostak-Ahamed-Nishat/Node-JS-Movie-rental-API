@@ -24,10 +24,19 @@ const customerSchemaValidator = Joi.object({
     isGold: Joi.boolean().required(),
 });
 
+//Rental validators
+function rentalSchemaValidator(rental) {
+    const schema = {
+        customer: Joi.string().required,
+        movie: Joi.string().required
+    }
 
+    return Joi.validate(rental, schema)
+}
 
 module.exports = {
     genreSchemaValidator,
     movieSchemaValidator,
-    customerSchemaValidator
+    customerSchemaValidator,
+    rentalSchemaValidator
 }

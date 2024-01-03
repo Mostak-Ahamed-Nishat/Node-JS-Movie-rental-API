@@ -5,6 +5,7 @@ const app = express()
 const genre = require('./Routes/genresRoute')
 const movie = require('./Routes/moviesRoute')
 const customer = require('./Routes/customerRoute')
+const rental = require('./Routes/rentalRoute')
 
 app.use(express.urlencoded({
     extended: true
@@ -16,11 +17,13 @@ app.use(express.json())
 // app.use(bodyParser.urlencoded({ extended: false }));
 
 //**Router for genres*/
-app.use('/api/genre', genre)
+app.use('/api/genres', genre)
 //**Router for movie*/
-app.use('/api/movie', movie)
+app.use('/api/movies', movie)
 //**Router for Customer*/
-app.use('/api/customer', customer)
+app.use('/api/customers', customer)
+//**Router for Rental*/
+app.use('/api/rentals', rental)
 
 
 
