@@ -10,7 +10,7 @@ const genreSchemaValidator = Joi.object({
 
 //Movies validators
 const movieSchemaValidator = Joi.object({
-    name: Joi.string().min(5).max(255).trim().required(),
+    title: Joi.string().min(5).max(255).trim().required(),
     genre: Joi.string().required(),
     numberInStock: Joi.number().required().min(0),
     dailyRentalRate: Joi.number().required().min(1)

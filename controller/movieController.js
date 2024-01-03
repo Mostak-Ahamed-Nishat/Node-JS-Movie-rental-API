@@ -40,12 +40,12 @@ async function createMovie(req, res) {
 
         if (!genre) {
             res.status(404).json({
-                error: 'genre not found'
+                error: 'Genre not found'
             })
         }
 
         const {
-            name,
+            title,
             numberInStock,
             dailyRentalRate
         } = req.body
@@ -54,7 +54,7 @@ async function createMovie(req, res) {
         const {
             error
         } = movieSchemaValidator.validate({
-            name,
+            title,
             genre: `${genre}`,
             numberInStock,
             dailyRentalRate
@@ -69,7 +69,7 @@ async function createMovie(req, res) {
 
 
         let data = {
-            name,
+            title,
             genre: {
                 _id: genre.id,
                 name: genre.name
@@ -134,7 +134,7 @@ async function updateMovie(req, res) {
         }
         //get the data from body
         const {
-            name,
+            title,
             numberInStock,
             dailyRentalRate
         } = req.body
@@ -143,7 +143,7 @@ async function updateMovie(req, res) {
         const {
             error
         } = movieSchemaValidator.validate({
-            name,
+            title,
             genre: `${genre}`,
             numberInStock,
             dailyRentalRate
@@ -159,7 +159,7 @@ async function updateMovie(req, res) {
 
         // prepare the move object for the database
         let data = {
-            name,
+            title,
             genre: {
                 _id: genre.id,
                 name: genre.name
