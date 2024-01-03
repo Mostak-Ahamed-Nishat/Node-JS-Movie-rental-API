@@ -17,8 +17,17 @@ const movieSchemaValidator = Joi.object({
 });
 
 
+//Customer validators
+const customerSchemaValidator = Joi.object({
+    name: Joi.string().min(3).max(100).required(),
+    phone: Joi.number().required().min(11),
+    isGold: Joi.boolean().required(),
+});
+
+
 
 module.exports = {
     genreSchemaValidator,
-    movieSchemaValidator
+    movieSchemaValidator,
+    customerSchemaValidator
 }

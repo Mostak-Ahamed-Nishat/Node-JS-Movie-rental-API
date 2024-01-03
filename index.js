@@ -4,6 +4,7 @@ const dbConnection = require('./db')
 const app = express()
 const genre = require('./Routes/genresRoute')
 const movie = require('./Routes/moviesRoute')
+const customer = require('./Routes/customerRoute')
 
 app.use(express.urlencoded({
     extended: true
@@ -16,9 +17,10 @@ app.use(express.json())
 
 //**Router for genres*/
 app.use('/api/genre', genre)
-
+//**Router for movie*/
 app.use('/api/movie', movie)
-
+//**Router for Customer*/
+app.use('/api/customer', customer)
 
 
 
