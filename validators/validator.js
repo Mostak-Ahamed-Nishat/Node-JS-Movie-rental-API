@@ -27,16 +27,33 @@ const customerSchemaValidator = Joi.object({
 //Rental validators
 function rentalSchemaValidator(rental) {
     const schema = {
-        customer: Joi.string().required,
-        movie: Joi.string().required
-    }
+        customer: Joi.string().required(),
+        movie: Joi.string().required()
+    };
 
-    return Joi.validate(rental, schema)
+    return schema
 }
+
+
+// User Validators
+const userValidator = Joi.object({
+    name: Joi.string().required().min(3).max(100),
+    email: Joi.string().required().email().min(5).max(100),
+    password: Joi.string().min(6).max(100).required()
+})
+
+
+// Auth Validators
+const authValidator = Joi.object({
+    email: Joi.string().required().email().min(5).max(100),
+    password: Joi.string().min(6).max(100).required()
+})
 
 module.exports = {
     genreSchemaValidator,
     movieSchemaValidator,
     customerSchemaValidator,
-    rentalSchemaValidator
+    rentalSchemaValidator,
+    userValidator,
+    authValidator
 }

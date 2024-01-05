@@ -5,6 +5,12 @@ const {
 const Customer = require('../model/customerModel')
 const Movie = require('../model/moviesModel')
 
+//Fawn
+// var Fawn = require("fawn");
+// Fawn.init(process.env.DB_CONNECTION)
+
+// var task = Fawn.Task();
+
 
 //get all the Rental list
 async function getAllRental(req, res) {
@@ -31,7 +37,7 @@ async function getAllRental(req, res) {
 async function createRental(req, res) {
     try {
 
-        // check the rental validation status
+        // // check the rental validation status
         const {
             error
         } = rentalSchemaValidator(req.body)
@@ -74,7 +80,8 @@ async function createRental(req, res) {
             customer: {
                 _id: customer._id,
                 name: customer.name,
-                phone: customer.phone
+                phone: customer.phone,
+                isGold: customer.isGold
             },
             movie: {
                 _id: movie._id,
@@ -83,13 +90,38 @@ async function createRental(req, res) {
             }
         })
 
-        //Save the info to the database
-        rental =await rental.save()
 
-        console.log(rental);
+
+        // task.save("rentals", rental).update("movies", {
+        //     _id: movie._id
+        // }, {
+        //     $inc: {
+        //         numberInStock: -1
+        //     }
+        // }).run().then(function (results) {
+        //     // task is complete 
+
+        //     // result from first operation
+        //     var firstUpdateResult = results[0];
+
+        //     // result from second operation
+        //     var secondUpdateResult = results[1]
+        // })
+        // .catch(function (err) {
+        //     // Everything has been rolled back.
+
+        //     // log the error which caused the failure
+        //     console.log(err);
+        // });
+
+
+
+
+        //Save the info to the database
+        rental = await rental.save()
         //Decrement the number inStock of the movie
         movie.numberInStock--
-        await movie.save()
+        movie.save()
 
         //return response
         return res.status(200).json({
@@ -97,8 +129,9 @@ async function createRental(req, res) {
         })
 
     } catch (error) {
+        console.log(error);
         res.status(500).json({
-            error: error,
+            error: error.message,
         })
     }
 }

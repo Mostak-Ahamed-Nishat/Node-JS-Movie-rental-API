@@ -61,10 +61,10 @@ async function createMovie(req, res) {
         })
 
         if (error) {
-            res.status(400).json({
+            return res.status(400).json({
                 error: error.details[0].message
             })
-            return 0
+
         }
 
 
@@ -83,13 +83,13 @@ async function createMovie(req, res) {
         const movie = await new Movie(data)
         movie.save()
 
-        res.status(200).json({
+        return res.status(200).json({
             message: 'Movie saved successfully',
             data: movie
         })
 
     } catch (error) {
-        res.status(500).json({
+        return res.status(500).json({
             error: 'Server error',
         })
     }
@@ -124,7 +124,6 @@ async function getMovieById(req, res) {
 // get the movie by its id and update the movie
 async function updateMovie(req, res) {
     try {
-
         // find the movie by its id
         const genre = await Genre.findById(req.body.genre)
         if (!genre) {

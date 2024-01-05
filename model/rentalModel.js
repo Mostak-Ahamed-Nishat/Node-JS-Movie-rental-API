@@ -1,4 +1,5 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
+
 
 const Rental = mongoose.model('Rental', new mongoose.Schema({
     customer: {
