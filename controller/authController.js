@@ -1,4 +1,5 @@
 const User = require("../model/userModel")
+var jwt = require('jsonwebtoken');
 
 const {
     authValidator
@@ -18,10 +19,10 @@ async function getAuthUser(req, res) {
 
         // if any errors are encountered then send an error message
         if (error) {
-            res.status(400).json({
+            return res.status(400).json({
                 error: error.details[0].message
             })
-            return 0
+
         }
 
 
@@ -50,9 +51,14 @@ async function getAuthUser(req, res) {
 
         // send a success message to the user after the user has authenticated
         if (hashPassword) {
-            return res.status(200).json({
-                message: 'valid user',
-                data: user
+
+            //Create a jwt
+            let token = user.generateAuthToken()
+
+            return res.send(token)
+        } else {
+            return res.status(404).json({
+                message: 'Invalid username or password',
             })
         }
 

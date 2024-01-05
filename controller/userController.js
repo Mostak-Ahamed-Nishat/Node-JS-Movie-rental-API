@@ -3,7 +3,10 @@ const {
     userValidator
 } = require("../validators/validator")
 const bcrypt = require('bcrypt');
-require('dotenv').config()
+const jwt = require('jsonwebtoken');
+
+
+
 
 // **Get All The Users
 async function getAllUser(req, res) {
@@ -20,6 +23,9 @@ async function getAllUser(req, res) {
     }
 }
 
+
+
+//Register/Create user
 async function createUser(req, res) {
     try {
 
@@ -72,8 +78,12 @@ async function createUser(req, res) {
         const user = new User(data)
         await user.save()
 
+
+        //Create a token
+        let token = user.generateAuthToken()
+
         // send a success message to the user after the genre has been created
-        return res.status(201).json({
+        return res.header('x-auth-token', token).status(201).send({
             message: 'User successfully has created',
             data: user
         })
