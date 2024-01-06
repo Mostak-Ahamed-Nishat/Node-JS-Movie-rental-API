@@ -9,6 +9,7 @@ const {
     deleteGenre
 } = require('../controller/genreController')
 const isAuthenticatedUser = require('../middleware/authMiddleware')
+const isAdminMiddleware = require('../middleware/isAdminMiddleware')
 
 //get all the genres
 router.get('/', getAllGenres)
@@ -17,7 +18,7 @@ router.get('/', getAllGenres)
 router.get('/:id', getGenreById)
 
 //Create a new genre
-router.post('/',isAuthenticatedUser, createGenre)
+router.post('/',[isAuthenticatedUser,isAdminMiddleware], createGenre)
 
 //Update the genre
 router.put('/:id', updateGenre)
