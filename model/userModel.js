@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken')
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -36,6 +37,9 @@ userSchema.methods.generateAuthToken = function () {
 }
 
 
+
 const User = mongoose.model('User', userSchema);
+
+console.log();
 
 module.exports = User;

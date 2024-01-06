@@ -44,12 +44,16 @@ async function getGenreById(req, res) {
 
 //***Create a new genre
 async function createGenre(req, res) {
-    
+
     try {
+
+
+
         //check if any errors are encountered 
         const {
             error
         } = genreSchemaValidator.validate(req.body)
+
 
         // if any errors are encountered then send an error message
         if (error) {

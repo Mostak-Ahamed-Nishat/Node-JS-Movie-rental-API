@@ -11,7 +11,6 @@ require('dotenv').config()
 //Get the Authenticate user
 async function getAuthUser(req, res) {
     try {
-
         //check if any errors are encountered 
         const {
             error
@@ -51,10 +50,8 @@ async function getAuthUser(req, res) {
 
         // send a success message to the user after the user has authenticated
         if (hashPassword) {
-
             //Create a jwt
             let token = user.generateAuthToken()
-
             return res.send(token)
         } else {
             return res.status(404).json({
