@@ -9,8 +9,8 @@ require('dotenv').config()
 
 
 //Get the Authenticate user
-async function getAuthUser(req, res) {
-    try {
+async function getAuthUser(req, res,next) {
+
         //check if any errors are encountered 
         const {
             error
@@ -58,13 +58,6 @@ async function getAuthUser(req, res) {
                 message: 'Invalid username or password',
             })
         }
-
-    } catch (error) {
-        return res.status(500).json({
-            error: error.message
-        })
-
-    }
 
 }
 

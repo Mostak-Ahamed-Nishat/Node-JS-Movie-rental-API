@@ -1,4 +1,5 @@
 const express = require('express')
+require('express-async-errors');
 require('dotenv').config()
 const dbConnection = require('./db')
 const app = express()
@@ -8,6 +9,7 @@ const customer = require('./Routes/customerRoute')
 const rental = require('./Routes/rentalRoute')
 const user = require('./Routes/userRoute')
 const auth = require('./Routes/authRoute')
+const handleError = require('./middleware/errorHandlingMiddleware')
 
 app.use(express.urlencoded({
     extended: true
@@ -30,6 +32,8 @@ app.use('/api/rentals', rental)
 app.use('/api/users', user)
 //**Router for Auth*/
 app.use('/api/auth', auth)
+// Error handling
+app.use(handleError)
 
 
 app.listen(process.env.PORT, () => {
